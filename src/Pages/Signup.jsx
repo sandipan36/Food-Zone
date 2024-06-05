@@ -37,9 +37,8 @@ function Signup() {
       });
       console.log(response.data);
       
-      // Redirect to another page upon successful sign-up if needed
        // Redirect to home page
-       window.location.href = '/Login';
+       window.location.href = '/';
     } catch (error) {
       setError('Failed to sign up. Please try again.');
     }

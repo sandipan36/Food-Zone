@@ -59,21 +59,24 @@ export default function Products() {
     try {
       // Fetch user information
       await fetchUser();
-
+  
       // Use user's ID stored in state
       const userId = user ? user.id : null;
       const token = localStorage.getItem('jwt');
-
+  
       // Check if user is authenticated
       if (userId && token) {
-        const response = await axios.get(`https://six9foodzonee.onrender.com/carts?filters[userId]=${userId}&filters[ProductId]=${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
+        const response = await axios.get(
+          `https://six9foodzonee.onrender.com/api/carts?filters[userId][$eq]=${userId}&filters[ProductId][$eq]=${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+  
         const existingCartItem = response.data.data[0];
-
+  
         // Update existing cart item or add new item
         if (existingCartItem) {
           await axios.put(
@@ -106,7 +109,7 @@ export default function Products() {
             }
           );
         }
-
+  
         // Alert and navigate
         alert('Product added to cart successfully!');
         navigate('/cart');
@@ -120,6 +123,7 @@ export default function Products() {
       setError('Failed to add product to cart. Please try again later.');
     }
   };
+  
 
   useEffect(() => {
     // Fetch user information and product details when component mounts

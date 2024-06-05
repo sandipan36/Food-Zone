@@ -67,7 +67,7 @@ const About = () => {
                 <img
                   src={`https://six9foodzonee.onrender.com${imageUrl}`}
                   alt={`Image ${index}`}
-                  className="w-full h-[500px] object-cover"
+                  className="w-full h-[500px] object-cover rounded-xl"
                 />
               </div>
             </div>
@@ -75,7 +75,7 @@ const About = () => {
         </Slider>
       </div>
       <div className="mt-8">
-        <h2 className="text-2xl font-bold mb-4">Our Team</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Our Team</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {/* Render your team members' cards here */}
           <div className="bg-gray-200 p-4 rounded-lg shadow-md mx-auto">NIKE</div>
@@ -93,8 +93,12 @@ const About = () => {
             </div>
             <div className="p-4 bg-gray-200 rounded shadow-md">
               <div className="mt-1 flex">
-                <h2 className='text-sm subpixel-antialiased font-medium mr-2'>Rating:</h2>
+                <h2 className='text-sm subpixel-antialiased font-medium mr-2'>Comment:</h2>
                 <p className='font-medium'>{value.attributes.Title}</p>
+              </div>
+              <div className="mt-1 flex">
+                <h2 className='text-sm subpixel-antialiased font-medium mr-2'>Rating :</h2>
+                <p className='font-medium'><img src="https://cdn.pixabay.com/photo/2012/04/01/19/28/rating-24185_1280.png" alt="nw" className='h-12 w-fit'/></p>
               </div>
               <div className="mt-1 flex">
                 <h2 className='text-sm subpixel-antialiased font-medium mr-2'>Posted:</h2>
