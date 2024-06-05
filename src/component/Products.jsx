@@ -17,7 +17,7 @@ export default function Products() {
     try {
       const token = localStorage.getItem('jwt');
       if (token) {
-        const userResponse = await axios.get('http://localhost:1337/api/users/me', {
+        const userResponse = await axios.get('https://six9foodzonee.onrender.com/api/users/me', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -66,7 +66,7 @@ export default function Products() {
 
       // Check if user is authenticated
       if (userId && token) {
-        const response = await axios.get(`http://localhost:1337/api/carts?filters[userId]=${userId}&filters[ProductId]=${id}`, {
+        const response = await axios.get(`https://six9foodzonee.onrender.com/carts?filters[userId]=${userId}&filters[ProductId]=${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -77,7 +77,7 @@ export default function Products() {
         // Update existing cart item or add new item
         if (existingCartItem) {
           await axios.put(
-            `http://localhost:1337/api/carts/${existingCartItem.id}`,
+            `https://six9foodzonee.onrender.com/api/carts/${existingCartItem.id}`,
             {
               data: {
                 products: Number(existingCartItem.attributes.products) + quantity,
@@ -91,7 +91,7 @@ export default function Products() {
           );
         } else {
           await axios.post(
-            'http://localhost:1337/api/carts',
+            'https://six9foodzonee.onrender.com/api/carts',
             {
               data: {
                 userId: userId.toString(),
