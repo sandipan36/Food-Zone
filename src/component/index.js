@@ -6,8 +6,9 @@ import Images from "./Images";
 import Footer from "./Footer"
 import Product from "./Product";
 import Scroll from "./Scroll";
-
-
+import CompanyLogos from "./CompanyLogo";
+import NewsBanner from "./NewsBanner";
+import Cart from "./Cart"
 export {
     Navbar,
     Userpost,
@@ -16,4 +17,7 @@ export {
     Footer,
     Product,
     Scroll,
+    CompanyLogos,
+    NewsBanner,
+    Cart,
 }

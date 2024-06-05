@@ -6,10 +6,10 @@ import Images from './Images'
 
 const Footer = () => {
   return (
-    <div className='w-full max-w-full bg-slate-500 text-gray-300 px-8 py-2 relative bottom-full  '>
+    <div className='w-full max-w-full text-gray-300 bg-slate-900 px-8 py-2 relative bottom-full  '>
       <div className='max-w-[1240px] mx-auto grid grid-cols-3  md:grid-cols-5 sm:grid-cols-2 border-b-2 border-gray-700 drop-shadow-lg py-8'>
         <div>
-          <h5 className='font-bold uppercase py-2'>Menu</h5>
+          <h5 className='font-bold uppercase py-2 text-[#991b1b] cursor-pointer hover:text-white   w-fit'>Menu</h5>
           <ol>
             <li>
               <Link to="/">Home</Link>
@@ -26,7 +26,7 @@ const Footer = () => {
           </ol>
         </div>
         <div>
-          <h5 className='font-bold uppercase py-2'>Quick Licks </h5>
+          <h5 className='font-bold uppercase py-2 text-[#991b1b] cursor-pointer hover:text-white   w-fit'>Quick Licks </h5>
           <ol>
             <li>
               FaceBook
@@ -43,8 +43,8 @@ const Footer = () => {
           </ol>
         </div>
 {/* Third Grid  */}
-<div>
-          <h5 className='font-bold uppercase py-2'>Quick  </h5>
+        <div>
+          <h5 className='font-bold uppercase py-2 text-[#991b1b] cursor-pointer hover:text-white   w-fit'>Quick Links  </h5>
           <ol>
             <li>
               FaceBook
@@ -60,9 +60,9 @@ const Footer = () => {
             </li>
           </ol>
         </div>
-
+        
         <div>
-          <h5 className='font-bold uppercase py-2'>Quick Licks </h5>
+          <h5 className='font-bold uppercase py-2 text-[#991b1b] cursor-pointer hover:text-white  w-fit '>Quick Links </h5>
           <ol>
             <li>
               FaceBook
@@ -77,6 +77,9 @@ const Footer = () => {
               YouTube
             </li>
           </ol>
+        </div>
+        <div>
+          <img src='https://cdn.pixabay.com/photo/2024/04/29/10/20/gaming-8727501_1280.jpg' className='w-[130px] py-2 rounded-xl '/>
         </div>
       </div>
       <div className='flex justify-around'>

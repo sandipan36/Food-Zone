@@ -76,7 +76,7 @@ const About = () => {
     <div className="container mx-auto px-4">
       <div className="mt-8 relative">
         <div className='flex mx-auto'>
-        <p className="text-3xl font-bold mb-4 mx-auto shadow-xl ">About Us</p>
+        
         </div>
         <Slider {...settings}>
           {images.map((imageUrl, index) => (

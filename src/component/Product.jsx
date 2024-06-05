@@ -42,7 +42,7 @@ const Product= () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://six9foodzonee.onrender.com/api/products');
+        const response = await axios.get('http://localhost:1337/api/products?populate=*');
         setProducts(response.data.data);
       } catch (error) {
         console.error('Error fetching products:', error);

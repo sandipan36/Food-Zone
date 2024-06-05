@@ -84,14 +84,14 @@ export default function ImagesPage() {
 
   return (
     <div className="container w-full
-     h-max flex flex-wrap">
+     h-auto flex flex-wrap">
      <div className="block ml-2 mt-2 fixed z-2">
         <button onClick={() => setIsMenuOpen(true)} className="text-2xl">
           <img src={menu}/>
         </button>
       </div>
 
-      <div className="w-1/6 hidden lg:block mt-9 shadow-lg h-fit  ml-3 bg-purple-200 rounded">
+      <div className="w-1/6 hidden lg:block mt-9 shadow-lg h-fit  ml-3 bg-purple-200 rounded ">
         <h2 className="text-xl font-bold mb-4 mt-4 text-center">Categories</h2>
         <ul className="text-lg">
           {categori.map((category, index) => (
@@ -113,6 +113,16 @@ export default function ImagesPage() {
             <li key={index} className='text-center text-red-400 hover:text-red-600 cursor-pointer  mx-auto hover:bg-slate-400'>{category}</li>
           ))}
         </ul>
+        <div>
+          <p className='text-center bg-dimwhite mt-5 font-serif font-semibold '>
+            OUR TOP OFFERS
+          </p>
+          <ul className="text-lg">
+          {categori.map((category, index) => (
+            <li key={index} className='text-center text-red-400 hover:text-red-600 cursor-pointer  mx-auto hover:bg-slate-400'>{category}</li>
+          ))}
+        </ul>
+        </div>
       </div>
   
       {/* Modal for Categories (visible on small screens) */}
@@ -122,7 +132,7 @@ export default function ImagesPage() {
 
       {/* Products Section */}
       <div className="w-full lg:w-1/2 ">
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap ">
           {products.map((product, index) => (
             <div key={index} className="max-w-sm rounded-xl overflow-hidden shadow-lg my-4 lg:mr-4  mx-auto w-full">
               <img src={`http://localhost:1337${product.attributes.image.data.attributes.url}`} alt={`Image ${index}`} className="w-full" />
@@ -137,9 +147,9 @@ export default function ImagesPage() {
       </div>
 
       {/* Latest News Section */}
-      <div className="lg:w-1/4 mt-4 lg:mt-0 lg:order-last lg:fixed lg:ml-[860px] sm:mb-3 h-full bg-blue-200">
+      <div className="lg:w-1/4 mt-4 lg:mt-0 lg:order-last lg:fixed md:ml-[860px]  mb-3 h-auto bg-dimwhite md:mb-3">
         <h2 className="text-xl text-center font-mono text-red-300 hover:text-blue-700 font-bold mb-4 mt-4 z-9  stick top-0 bg-blue-200">Latest News</h2>
-        <div className="overflow-hidden h-72 lg:h-auto">
+        <div className="overflow-hidden h-auto">
           <ul className="p-2 mt-1">
             {news.map((article, index) => (
               <li key={index} className={`transition-transform duration-200 ease-in transform ${index === currentNewsIndex ? 'translate-y-0' : 'translate-y-full'}`} style={{ display: index >= currentNewsIndex && index < currentNewsIndex + 1 ? 'block' : 'none' }}>
@@ -149,7 +159,7 @@ export default function ImagesPage() {
                     <div className="px-6 py-4">
                       <div className="font-bold text-xl mb-2">{article.title}</div>
                       <hr></hr>
-                      <p className="text-gray-700 mb-5 sm:mb-3 font-mono font-bold ">{article.description}</p>
+                      <p className="text-gray-700 mb-5 font-mono font-bold ">{article.description}</p>
                     </div>
                   </a>
                 </div>

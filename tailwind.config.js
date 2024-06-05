@@ -14,7 +14,7 @@ export default {
         dimwhite: " rgba(255, 255, 255, 0.7) ",
       },
       fontfamily: {
-        poppins: ["poppins", "sans-serif"],
+        poppins: ["Poppins", "sans-serif", "Georgia"],
       }
     },
     screens: {

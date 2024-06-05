@@ -1,6 +1,6 @@
 import { Homepage, Blogcontent } from "./Pages";
 import {Routes,Route} from "react-router-dom"
-import { About, Images, Product } from "./component";
+import { About, Cart, Images, Product } from "./component";
 import Videos from "./component/Videos";
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer"
@@ -9,12 +9,10 @@ import Products from "./component/Products";
 import Loading from "./Pages/Loading";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
-
+import CompanyLogos from "./component/CompanyLogo";
 
 export default function App() {
-// let {loading, data, error}=Usefetch("http://localhost:1337/api/products")
-// if(loading) return <Loading/>
-// if(error) return <p>Network Error</p>
+
 
   return (
     <div>
@@ -29,6 +27,7 @@ export default function App() {
         <Route path="/Products/:id" element={<Products/>}></Route>
         <Route path ="/Signup" element ={<Signup/>}></Route>
         <Route path="/Login" element = {<Login/>}></Route>
+        <Route path="/Cart" element = {<Cart/>}></Route>
       </Routes>
       <div className='min-h-max'>
         <Footer/>
@@ -39,43 +38,3 @@ export default function App() {
 }
 
 
-
-// // subs={data?data:""}
-
-
-// import React, { Children } from 'react'
-// import {createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom';
-// import { About, Footer } from "./component";
-// import { Blogcontent, Homepage } from "./Pages";
-
-
-
-// const router = createBrowserRouter([
-//   {
-//     path:"/",
-//     element : <Layout/>,
-//     Children:[
-//       {
-//         path:"/",
-//         element:<Homepage/>
-//       },
-//       {
-//         path:"/blog/:id",
-//         element:<Blogcontent/>
-//       },
-//       {
-//         path:"/about",
-//         element:<About/>
-//       }
-//     ]
-//   },
-// ])
-
-
-// export default function App() {
-//   return (
-//     <div>
-//       <RouterProvider router= {router}/>
-//     </div>
-//   )
-// }
