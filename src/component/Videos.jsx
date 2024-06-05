@@ -15,7 +15,7 @@ const Videos = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('jwt'); // Corrected the token retrieval
         if (token) {
           const userResponse = await axios.get('https://six9foodzonee.onrender.com/api/users/me', {
             headers: {
@@ -40,7 +40,7 @@ const Videos = () => {
         const videosData = response.data.data.map(video => ({
           id: video.id,
           title: video.attributes.Title,
-          url: video.attributes.story.data[0].attributes.url,
+          url: video.attributes.story.data[0]?.attributes.url, // Handle case where story data may not be available
         }));
         setVideos(videosData);
       } catch (error) {
@@ -55,7 +55,7 @@ const Videos = () => {
   // Handle form submission to post a new video to the API
   const handleVideoSubmit = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('jwt');
     if (!user) {
       setShowModal(true); // Show modal if user is not logged in
       return;
@@ -70,7 +70,7 @@ const Videos = () => {
     formData.append('files.story', file);
 
     try {
-      const response = await axios.post('http://localhost:1337/api/vedios', formData, {
+      const response = await axios.post('https://six9foodzonee.onrender.com/api/vedios', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`, // Include the token in the headers
@@ -120,10 +120,12 @@ const Videos = () => {
             {videos.map((video) => (
               <div key={video.id} className='bg-white h-max p-4 rounded shadow'>
                 <h3>{video.title}</h3>
-                {video.url && (
+                {video.url ? (
                   <video width='100%' height='100' controls>
-                    <source src={`http://localhost:1337${video.url}`} type='video/mp4' />
+                    <source src={`https://six9foodzonee.onrender.com${video.url}`} type='video/mp4' />
                   </video>
+                ) : (
+                  <p>No video available</p>
                 )}
               </div>
             ))}
@@ -155,3 +157,4 @@ const Videos = () => {
 };
 
 export default Videos;
+//  final 
