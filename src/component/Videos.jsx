@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Loading from '../Pages/Loading'; // Make sure this component is correctly imported
+import Loading from '../Pages/Loading'; // Ensure this component is correctly imported
 
 const Videos = () => {
-  const [videos, setVideos] = useState([]);
+  const [allVideos, setAllVideos] = useState([]);
+  const [myVideos, setMyVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false); // New state for submission loading
   const [user, setUser] = useState(null); // State to store user information
@@ -32,7 +33,7 @@ const Videos = () => {
     fetchUser();
   }, []);
 
-  // Fetch videos from the API when the component mounts
+  // Fetch all videos from the API
   useEffect(() => {
     const fetchVideos = async () => {
       try {
@@ -41,8 +42,9 @@ const Videos = () => {
           id: video.id,
           title: video.attributes.Title,
           url: video.attributes.story.data[0]?.attributes.url, // Handle case where story data may not be available
+          userId: video.attributes.userId, // Assuming there is a userId field
         }));
-        setVideos(videosData);
+        setAllVideos(videosData);
       } catch (error) {
         console.error('Error fetching videos:', error);
       } finally {
@@ -51,6 +53,26 @@ const Videos = () => {
     };
     fetchVideos();
   }, []);
+
+  // Fetch logged-in user's videos
+  useEffect(() => {
+    if (user) {
+      const fetchMyVideos = async () => {
+        try {
+          const response = await axios.get(`https://six9foodzonee.onrender.com/api/vedios?filters[userId][$eq]=${user.id}&populate=*`);
+          const myVideosData = response.data.data.map(video => ({
+            id: video.id,
+            title: video.attributes.Title,
+            url: video.attributes.story.data[0]?.attributes.url, // Handle case where story data may not be available
+          }));
+          setMyVideos(myVideosData);
+        } catch (error) {
+          console.error('Error fetching my videos:', error);
+        }
+      };
+      fetchMyVideos();
+    }
+  }, [user]);
 
   // Handle form submission to post a new video to the API
   const handleVideoSubmit = async (event) => {
@@ -66,8 +88,14 @@ const Videos = () => {
     const file = event.target.file.files[0];
 
     const formData = new FormData();
-    formData.append('data', JSON.stringify({ Title: title, user: user.id }));
+    const data = { Title: title, userId: user.id }; // Include userId in the data object
+    formData.append('data', JSON.stringify(data));
     formData.append('files.story', file);
+
+    // Debug: Log FormData content
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
 
     try {
       const response = await axios.post('https://six9foodzonee.onrender.com/api/vedios', formData, {
@@ -90,6 +118,21 @@ const Videos = () => {
       setSubmitting(false); // Set submitting state to false
     }
     event.target.reset();
+  };
+
+  // Handle video deletion
+  const handleDeleteVideo = async (videoId) => {
+    const token = localStorage.getItem('jwt');
+    try {
+      await axios.delete(`https://six9foodzonee.onrender.com/api/vedios/${videoId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      window.location.reload(); // Refresh the page after successful deletion
+    } catch (error) {
+      console.error('Error deleting video:', error);
+    }
   };
 
   return (
@@ -116,19 +159,51 @@ const Videos = () => {
         {loading ? (
           <Loading />
         ) : (
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4'>
-            {videos.map((video) => (
-              <div key={video.id} className='bg-white h-max p-4 rounded shadow'>
-                <h3>{video.title}</h3>
-                {video.url ? (
-                  <video width='100%' height='100' controls>
-                    <source src={`https://six9foodzonee.onrender.com${video.url}`} type='video/mp4' />
-                  </video>
-                ) : (
-                  <p>No video available</p>
-                )}
+          <div>
+            {user && (
+              <div className='mt-8'>
+                <h3 className='text-center font-bold md:text-xl'>My Videos</h3>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4'>
+                  {myVideos.length > 0 ? (
+                    myVideos.map((video) => (
+                      <div key={video.id} className='bg-white h-max p-4 rounded shadow'>
+                        <h3>{video.title}</h3>
+                        {video.url ? (
+                          <video width='100%' height='100' controls>
+                            <source src={`https://six9foodzonee.onrender.com${video.url}`} type='video/mp4' />
+                          </video>
+                        ) : (
+                          <p>No video available</p>
+                        )}
+                        <button onClick={() => handleDeleteVideo(video.id)} className='mt-2 bg-red-500 text-white px-4 py-2 rounded'>
+                          Delete
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No videos found.</p>
+                  )}
+                </div>
               </div>
-            ))}
+            )}
+
+            <div className='mt-8'>
+              <h3 className='text-center font-bold md:text-xl'>All Videos</h3>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4'>
+                {allVideos.map((video) => (
+                  <div key={video.id} className='bg-white h-max p-4 rounded shadow'>
+                    <h3>{video.title}</h3>
+                    {video.url ? (
+                      <video width='100%' height='100' controls>
+                        <source src={`https://six9foodzonee.onrender.com${video.url}`} type='video/mp4' />
+                      </video>
+                    ) : (
+                      <p>No video available</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 
@@ -157,4 +232,3 @@ const Videos = () => {
 };
 
 export default Videos;
-//  final 
