@@ -17,7 +17,7 @@ const Videos = () => {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const userResponse = await axios.get('http://localhost:1337/api/users/me', {
+          const userResponse = await axios.get('https://six9foodzonee.onrender.com/api/users/me', {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -36,7 +36,7 @@ const Videos = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await axios.get('http://localhost:1337/api/vedios?populate=*');
+        const response = await axios.get('https://six9foodzonee.onrender.com/api/vedios?populate=*');
         const videosData = response.data.data.map(video => ({
           id: video.id,
           title: video.attributes.Title,

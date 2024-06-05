@@ -53,7 +53,7 @@ const About = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get('http://localhost:1337/api/images?populate=*');
+        const response = await axios.get('https://six9foodzonee.onrender.com/api/images?populate=*');
         setImages(response.data.data.map(item => item.attributes.image.data.attributes.url)); // Extracting image URLs
         setNews(response.data.data);
       } catch (error) {
@@ -82,7 +82,7 @@ const About = () => {
           {images.map((imageUrl, index) => (
             <div key={index}>
               <div className=' grid w-100% '>
-              <img src={`http://localhost:1337${imageUrl}`} alt={`Image ${index}`} className="w-full h-[500px]" />
+              <img src={`https://six9foodzonee.onrender.com${imageUrl}`} alt={`Image ${index}`} className="w-full h-[500px]" />
               </div>
             </div>
           ))}

@@ -35,7 +35,7 @@ export default function Products() {
   // Function to fetch product details
   const fetchProduct = async () => {
     try {
-      const response = await axios.get(`http://localhost:1337/api/products/${id}?populate=*`);
+      const response = await axios.get(`https://six9foodzonee.onrender.com/api/products/${id}?populate=*`);
       setProduct(response.data.data);
     } catch (error) {
       setError('Network Error');
@@ -149,7 +149,7 @@ export default function Products() {
                 {Images.data.map(image => (
                   <img
                     key={image.id}
-                    src={`http://localhost:1337${image.attributes.url}`}
+                    src={`https://six9foodzonee.onrender.com${image.attributes.url}`}
                     alt={`Product Image ${image.id}`}
                     className="w-full h-40 object-cover rounded-lg shadow-md"
                   />

@@ -15,7 +15,7 @@ function Signup() {
 
   const fetchRoles = async () => {
     try {
-      const response = await axios.get('http://localhost:1337/api/users-permissions/roles');
+      const response = await axios.get('https://six9foodzonee.onrender.com/api/users-permissions/roles');
       setRoles(response.data.roles);
     } catch (error) {
       console.error('Error fetching roles: Api', error);
@@ -29,7 +29,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:1337/api/users', {
+      const response = await axios.post('https://six9foodzonee.onrender.com/api/users', {
         username,
         email,
         password,

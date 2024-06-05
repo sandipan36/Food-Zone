@@ -42,7 +42,7 @@ const Product= () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:1337/api/products?populate=*');
+        const response = await axios.get('https://six9foodzonee.onrender.com/api/products?populate=*');
         setProducts(response.data.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -60,7 +60,7 @@ const Product= () => {
           <Link to={`/products/${product.id}`} key={product.id}>
             <div className="bg-white rounded-lg shadow-md p-4 mb-5 h-[">
               <div className="mb-4">
-                <img src={`http://localhost:1337${product.attributes.Images.data[0].attributes.url}`} alt={product.attributes.Images.data[0].attributes.caption} className="w-full h-60 mt-1 object-cover" />
+                <img src={`https://six9foodzonee.onrender.com${product.attributes.Images.data[0].attributes.url}`} alt={product.attributes.Images.data[0].attributes.caption} className="w-full h-60 mt-1 object-cover" />
               </div>
               <div className="flex justify-between items-center mb-2">
                 <h2 className="text-xl font-bold">{product.attributes.Title}</h2>

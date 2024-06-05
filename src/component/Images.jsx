@@ -51,7 +51,7 @@ export default function ImagesPage() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get('http://localhost:1337/api/images?populate=*');
+        const response = await axios.get('https://six9foodzonee.onrender.com/api/images?populate=*');
         setProducts(response.data.data);
       } catch (error) {
         console.error('Error fetching images:', error);
@@ -135,7 +135,7 @@ export default function ImagesPage() {
         <div className="flex flex-wrap ">
           {products.map((product, index) => (
             <div key={index} className="max-w-sm rounded-xl overflow-hidden shadow-lg my-4 lg:mr-4  mx-auto w-full">
-              <img src={`http://localhost:1337${product.attributes.image.data.attributes.url}`} alt={`Image ${index}`} className="w-full" />
+              <img src={`https://six9foodzonee.onrender.com${product.attributes.image.data.attributes.url}`} alt={`Image ${index}`} className="w-full" />
               <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{product.attributes.Username}</div>
                 <p className="text-gray-700 text-base" >{product.attributes.Title}</p>
