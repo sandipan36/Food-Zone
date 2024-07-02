@@ -21,7 +21,7 @@ export default function Products() {
     try {
       const token = localStorage.getItem('jwt');
       if (token) {
-        const userResponse = await axios.get('http://localhost:1337/api/users/me', {
+        const userResponse = await axios.get('https://six9foodzonee.onrender.com/api/users/me', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -36,10 +36,10 @@ export default function Products() {
     }
   };
 
-  // Function to fetch product details
+  // Function to fetch product deta
   const fetchProduct = async () => {
     try {
-      const response = await axios.get(`http://localhost:1337/api/products/${id}?populate=*`);
+      const response = await axios.get(`https://six9foodzonee.onrender.com/api/products/${id}?populate=*`);
       setProduct(response.data.data);
     } catch (error) {
       setError('Network Error');
@@ -51,7 +51,7 @@ export default function Products() {
   // Function to fetch all products
   const fetchAllProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:1337/api/products?populate=*');
+      const response = await axios.get('https://six9foodzonee.onrender.com/api/products?populate=*');
       setAllProducts(response.data.data);
     } catch (error) {
       console.error('Failed to fetch all products:', error);
@@ -77,7 +77,7 @@ export default function Products() {
 
       if (userId && token) {
         const response = await axios.get(
-          `http://localhost:1337/api/carts?filters[userId][$eq]=${userId}&filters[ProductId][$eq]=${id}`,
+          `https://six9foodzonee.onrender.com/api/carts?filters[userId][$eq]=${userId}&filters[ProductId][$eq]=${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -89,7 +89,7 @@ export default function Products() {
 
         if (existingCartItem) {
           await axios.put(
-            `http://localhost:1337/api/carts/${existingCartItem.id}`,
+            `https://six9foodzonee.onrender.com/api/carts/${existingCartItem.id}`,
             {
               data: {
                 products: Number(existingCartItem.attributes.products) + quantity,
@@ -103,7 +103,7 @@ export default function Products() {
           );
         } else {
           await axios.post(
-            'http://localhost:1337/api/carts',
+            'https://six9foodzonee.onrender.com/api/carts',
             {
               data: {
                 userId: userId.toString(),
@@ -195,7 +195,7 @@ export default function Products() {
                   {Images.data.map(image => (
                     <div key={image.id}>
                       <img
-                        src={`http://localhost:1337${image.attributes.url}`}
+                        src={`https://six9foodzonee.onrender.com${image.attributes.url}`}
                         alt={`Product Image ${image.id}`}
                         className="w-[400px] h-[400px] mx-auto object-cover rounded-lg shadow-md"
                       />
@@ -207,7 +207,7 @@ export default function Products() {
                   {Images.data.map(image => (
                     <img
                       key={image.id}
-                      src={`http://localhost:1337${image.attributes.url}`}
+                      src={`https://six9foodzonee.onrender.com${image.attributes.url}`}
                       alt={`Product Image ${image.id}`}
                       className="w-[400px] h-[400px] object-cover rounded-lg mx-auto shadow-md"
                     />
@@ -268,7 +268,7 @@ export default function Products() {
                   <div className="bg-white rounded-lg shadow-lg p-4">
                     {product.attributes.Images?.data?.length > 0 && (
                       <img
-                        src={`http://localhost:1337${product.attributes.Images.data[0].attributes.url}`}
+                        src={`https://six9foodzonee.onrender.com${product.attributes.Images.data[0].attributes.url}`}
                         alt={`Product Image ${product.id}`}
                         className="w-full h-40 object-cover rounded-md"
                       />

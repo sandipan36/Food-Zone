@@ -25,7 +25,7 @@ const Userpost = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('http://localhost:1337/api/userposts?populate=*');
+        const response = await axios.get('https://six9foodzonee.onrender.com/api/userposts?populate=*');
         const fetchedBlogs = response.data.data.map(blog => {
           const attributes = blog.attributes;
           const imgsrc = attributes.imgsrc.data?.[0]?.attributes?.url ?? ''; // Handle missing image
@@ -53,7 +53,7 @@ const Userpost = () => {
       try {
         const token = localStorage.getItem('jwt');
         if (token) {
-          const userResponse = await axios.get('http://localhost:1337/api/users/me', {
+          const userResponse = await axios.get('https://six9foodzonee.onrender.com/api/users/me', {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -88,7 +88,7 @@ const Userpost = () => {
     formData.append('files.imgsrc', event.target.imgsrc.files[0]); // Append the selected file with 'files.imgsrc'
 
     try {
-      const response = await axios.post('http://localhost:1337/api/userposts', formData, {
+      const response = await axios.post('https://six9foodzonee.onrender.com/api/userposts', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
@@ -119,7 +119,7 @@ const Userpost = () => {
       <span className='ml-2 py-2 text-blue-900 font-bold'>UserName: {blog.username || 'Anonymous'}</span>
       {blog.imgsrc && (
         <div className='w-full'>
-          <img className='h-[200px]  w-full rounded-t-xl' src={`http://localhost:1337${blog.imgsrc}`} alt='User post image' />
+          <img className='h-[200px]  w-full rounded-t-xl' src={`https://six9foodzonee.onrender.com${blog.imgsrc}`} alt='User post image' />
         </div>
       )}
       <div className='p-5 overflow-x-hidden'>

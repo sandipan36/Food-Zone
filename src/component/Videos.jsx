@@ -18,7 +18,7 @@ const Videos = () => {
       try {
         const token = localStorage.getItem('jwt'); // Corrected the token retrieval
         if (token) {
-          const userResponse = await axios.get('http://localhost:1337/api/users/me', {
+          const userResponse = await axios.get('https://six9foodzonee.onrender.com/api/users/me', {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -37,7 +37,7 @@ const Videos = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await axios.get('http://localhost:1337/api/vedios?populate=*');
+        const response = await axios.get('https://six9foodzonee.onrender.com/api/vedios?populate=*');
         const videosData = response.data.data.map(video => ({
           id: video.id,
           title: video.attributes.Title,
@@ -59,7 +59,7 @@ const Videos = () => {
     if (user) {
       const fetchMyVideos = async () => {
         try {
-          const response = await axios.get(`http://localhost:1337/api/vedios?filters[userId][$eq]=${user.id}&populate=*`);
+          const response = await axios.get(`https://six9foodzonee.onrender.com/api/vedios?filters[userId][$eq]=${user.id}&populate=*`);
           const myVideosData = response.data.data.map(video => ({
             id: video.id,
             title: video.attributes.Title,
@@ -98,7 +98,7 @@ const Videos = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:1337/api/vedios', formData, {
+      const response = await axios.post('https://six9foodzonee.onrender.com/api/vedios', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`, // Include the token in the headers
@@ -124,7 +124,7 @@ const Videos = () => {
   const handleDeleteVideo = async (videoId) => {
     const token = localStorage.getItem('jwt');
     try {
-      await axios.delete(`http://localhost:1337/api/vedios/${videoId}`, {
+      await axios.delete(`https://six9foodzonee.onrender.com/api/vedios/${videoId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -170,7 +170,7 @@ const Videos = () => {
                         <h3>{video.title}</h3>
                         {video.url ? (
                           <video width='100%' height='100' controls>
-                            <source src={`http://localhost:1337${video.url}`} type='video/mp4' />
+                            <source src={`https://six9foodzonee.onrender.com${video.url}`} type='video/mp4' />
                           </video>
                         ) : (
                           <p>No video available</p>
@@ -195,7 +195,7 @@ const Videos = () => {
                     <h3>{video.title}</h3>
                     {video.url ? (
                       <video width='100%' height='100' controls>
-                        <source src={`http://localhost:1337${video.url}`} type='video/mp4' />
+                        <source src={`https://six9foodzonee.onrender.com${video.url}`} type='video/mp4' />
                       </video>
                     ) : (
                       <p>No video available</p>

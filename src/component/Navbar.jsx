@@ -29,7 +29,7 @@ function Navbar() {
         try {
             const token = localStorage.getItem('jwt');
             if (token) {
-                const userResponse = await axios.get('http://localhost:1337/api/users/me', {
+                const userResponse = await axios.get('https://six9foodzonee.onrender.com/api/users/me', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

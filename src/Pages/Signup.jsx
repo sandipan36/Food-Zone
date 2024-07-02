@@ -17,7 +17,7 @@ function Signup() {
 
   const fetchRoles = async () => {
     try {
-      const response = await axios.get('http://localhost:1337/api/users-permissions/roles');
+      const response = await axios.get('https://six9foodzonee.onrender.com/api/users-permissions/roles');
       setRoles(response.data.roles);
     } catch (error) {
       console.error('Error fetching roles:', error);
@@ -46,7 +46,7 @@ function Signup() {
         formData.append('files.avtar', profileImage);
       }
 
-      const response = await axios.post('http://localhost:1337/api/users', formData, {
+      const response = await axios.post('https://six9foodzonee.onrender.com/api/users', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

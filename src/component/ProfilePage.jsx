@@ -14,7 +14,7 @@ function ProfilePage() {
         try {
             const token = localStorage.getItem('jwt');
             if (token) {
-                const userResponse = await axios.get('http://localhost:1337/api/users/me?populate=*', {
+                const userResponse = await axios.get('https://six9foodzonee.onrender.com/api/users/me?populate=*', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -45,7 +45,7 @@ function ProfilePage() {
         try {
             const token = localStorage.getItem('jwt');
             const changePasswordResponse = await axios.put(
-                'http://localhost:1337/api/users/change-password',
+                'https://six9foodzonee.onrender.com/api/users/change-password',
                 {
                     currentPassword,
                     newPassword,
@@ -77,7 +77,7 @@ function ProfilePage() {
             <div className='max-w-md mx-auto'>
                 {user.avtar && user.avtar.url ? (
                     <div className='mb-4'>
-                        <img src={`http://localhost:1337${user.avtar.url}`} alt='Avatar' className='rounded-full w-32 h-32 mx-auto' />
+                        <img src={`https://six9foodzonee.onrender.com${user.avtar.url}`} alt='Avatar' className='rounded-full w-32 h-32 mx-auto' />
                     </div>
                 ) : (
                     <p> </p>
