@@ -7,6 +7,8 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [selectedRole, setSelectedRole] = useState('');
   const [roles, setRoles] = useState([]);
+  const [profileImage, setProfileImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -15,10 +17,10 @@ function Signup() {
 
   const fetchRoles = async () => {
     try {
-      const response = await axios.get('https://six9foodzonee.onrender.com/api/users-permissions/roles');
+      const response = await axios.get('http://localhost:1337/api/users-permissions/roles');
       setRoles(response.data.roles);
     } catch (error) {
-      console.error('Error fetching roles: Api', error);
+      console.error('Error fetching roles:', error);
     }
   };
 
@@ -26,19 +28,33 @@ function Signup() {
     setSelectedRole(roleId);
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setProfileImage(file);
+    setImagePreview(URL.createObjectURL(file));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://six9foodzonee.onrender.com/api/users', {
-        username,
-        email,
-        password,
-        role: selectedRole,
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('email', email);
+      formData.append('password', password);
+      formData.append('role', selectedRole);
+      if (profileImage) {
+        formData.append('files.avtar', profileImage);
+      }
+
+      const response = await axios.post('http://localhost:1337/api/users', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
+
       console.log(response.data);
-      
-       // Redirect to home page
-       window.location.href = '/';
+      // Redirect to home page
+      window.location.href = '/';
     } catch (error) {
       setError('Failed to sign up. Please try again.');
     }
@@ -126,6 +142,24 @@ function Signup() {
                     </label>
                   </div>
                 ))}
+              </div>
+            </div>
+            <div className="mt-4">
+              <label className="block text-sm font-medium text-gray-700">Profile Picture</label>
+              <div className="mt-1 flex items-center">
+                {imagePreview ? (
+                  <img src={imagePreview} alt="Avatar Preview" className="w-16 h-16 rounded-full object-cover" />
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-400">No Image</span>
+                  </div>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="ml-5"
+                />
               </div>
             </div>
           </div>

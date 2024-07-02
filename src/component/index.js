@@ -9,6 +9,8 @@ import Scroll from "./Scroll";
 import CompanyLogos from "./CompanyLogo";
 import NewsBanner from "./NewsBanner";
 import Cart from "./Cart"
+import ProfilePage from "./ProfilePage";
+
 export {
     Navbar,
     Userpost,
@@ -20,4 +22,5 @@ export {
     CompanyLogos,
     NewsBanner,
     Cart,
+    ProfilePage,
 }

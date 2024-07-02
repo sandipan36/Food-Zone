@@ -6,6 +6,7 @@ import axios from 'axios';
 function Navbar() {
     const [toggle, setToggle] = useState(true);
     const [user, setUser] = useState(null);
+    const [showDropdown, setShowDropdown] = useState(false); // State for dropdown visibility
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ function Navbar() {
         try {
             const token = localStorage.getItem('jwt');
             if (token) {
-                const userResponse = await axios.get('https://six9foodzonee.onrender.com/api/users/me', {
+                const userResponse = await axios.get('http://localhost:1337/api/users/me', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -57,7 +58,7 @@ function Navbar() {
     return (
         <div className='w-screen h-auto z-10 bg-white sticky drop-shadow-lg top-0 pt-2'>
             <div className='flex sticky justify-between items-center sm:top-0 w-full h-full md:max-w-[2040px]'>
-                <div className='flex '>
+                <div className='flex'>
                     <img src={logo} alt='logo' className='ss:ml-10 ml-5 w-full h-[50px] rounded-full mb-2' />
                 </div>
                 {/* Display current page name on small devices */}
@@ -79,11 +80,51 @@ function Navbar() {
                 </div>
 
                 <div className='sm:flex sm:mr-10 md:mr-10 hidden'>
-                    <Link to="/cart">
-                        <img src='https://cdn.pixabay.com/photo/2014/06/19/00/59/shopping-cart-371980_1280.png' alt='cart' className='h-5 w-5 mt-1'/>
-                    </Link>
                     {user ? (
-                        <button onClick={handleLogout} className='border-none bg-blue-500 px-3 py-2 ml-4 text-sm font-medium text-white rounded'>Logout</button>
+                        <div className='flex items-center'>
+                            
+                            <div className='relative'>
+                                <button
+                                    onClick={() => setShowDropdown(!showDropdown)}
+                                    className='ml-4 px-3 py-2 rounded text-sm font-medium'
+                                >
+                                    <img src='https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png' alt='cart' className='h-6 w-6 mt-1'/>
+                                </button>
+                                {showDropdown && (
+                                    <div className='absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg'>
+                                        <ul className='py-1'>
+                                        <li>
+                                            <Link to="/ProfilePage">
+                                              {/* <img src='https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png' alt='cart' className='h-5 w-5 mt-1'/>
+                                               */}
+
+                                               <button className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left mb-1 mt-1'>
+                                                Profile
+                                               </button>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/cart">
+                                              {/* <img src='https://cdn.pixabay.com/photo/2014/06/19/00/59/shopping-cart-371980_1280.png' alt='cart' className='h-5 w-5 mt-1'/>
+                                               */}
+
+                                               <button className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left mb-1 mt-1'>
+                                                Cart
+                                               </button>
+                                            </Link>
+                                        </li>
+                                            <li>
+                                                <button onClick={handleLogout} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left'>
+                                                    Logout
+                                                </button>
+                                            </li>
+                                           
+                                            {/* Add more options here if needed */}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     ) : (
                         <>
                             <Link to="/Login">
@@ -112,6 +153,12 @@ function Navbar() {
                 </li>
                 <li className='mb-3 h-fit text-center hover:bg-green-400 hover:rounded-md'>
                     <Link to="/about" className='p-3 text-sm font-medium text-gray-900 cursor-pointer hover:text-white'>About</Link>
+                </li>
+                <li className='mb-3 h-fit text-center hover:bg-green-400 hover:rounded-md'>
+                    <Link to="/Cart" className='p-3 text-sm font-medium text-gray-900 cursor-pointer hover:text-white'>Cart</Link>
+                </li>
+                <li className='mb-3 h-fit text-center hover:bg-green-400 hover:rounded-md'>
+                    <Link to="/ProfilePage" className='p-3 text-sm font-medium text-gray-900 cursor-pointer hover:text-white'>Profile</Link>
                 </li>
                 <div className='flex flex-col my-4'>
                     {user ? (

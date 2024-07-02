@@ -10,6 +10,7 @@ import Loading from "./Pages/Loading";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import CompanyLogos from "./component/CompanyLogo";
+import ProfilePage from "./component/ProfilePage";
 
 export default function App() {
 
@@ -28,6 +29,8 @@ export default function App() {
         <Route path ="/Signup" element ={<Signup/>}></Route>
         <Route path="/Login" element = {<Login/>}></Route>
         <Route path="/Cart" element = {<Cart/>}></Route>
+        <Route path="/ProfilePage" element = {<ProfilePage/>}></Route>
+
       </Routes>
       <div className='min-h-max'>
         <Footer/>

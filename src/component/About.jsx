@@ -3,6 +3,7 @@ import axios from 'axios';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { logo, menu } from '../assets';
 
 const About = () => {
   const [images, setImages] = useState([]);
@@ -11,7 +12,7 @@ const About = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get('https://six9foodzonee.onrender.com/api/images?populate=*');
+        const response = await axios.get('http://localhost:1337/api/images?populate=*');
         setImages(response.data.data.map(item => item.attributes.image.data.attributes.url)); // Extracting image URLs
         setNews(response.data.data);
       } catch (error) {
@@ -65,7 +66,7 @@ const About = () => {
             <div key={index}>
               <div className='grid w-100%'>
                 <img
-                  src={`https://six9foodzonee.onrender.com${imageUrl}`}
+                  src={`http://localhost:1337${imageUrl}`}
                   alt={`Image ${index}`}
                   className="w-full h-[500px] object-cover rounded-xl"
                 />
@@ -75,23 +76,25 @@ const About = () => {
         </Slider>
       </div>
       <div className="mt-8">
-        <h2 className="text-2xl font-bold mb-4 text-center">Our Team</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center text-blue-900 hover:text-blue-600">Our Team</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {/* Render your team members' cards here */}
-          <div className="bg-gray-200 p-4 rounded-lg shadow-md mx-auto">NIKE</div>
-          <div className="bg-gray-200 p-4 rounded-lg shadow-md mx-auto">ADIDAS</div>
-          <div className="bg-gray-200 p-4 rounded-lg shadow-md mx-auto">PUMA</div>
-          <div className="bg-gray-200 p-4 rounded-lg shadow-md mx-auto">BOAT</div>
+          <div className="bg-cyan-200 p-4 rounded-lg shadow-md mx-auto hover:bg-black hover:text-white text-xl ">
+            Nike
+          </div>
+          <div className="bg-cyan-200 p-4 rounded-lg shadow-md mx-auto hover:bg-black hover:text-white text-xl">ADIDAS</div>
+          <div className="bg-cyan-200 p-4 rounded-lg shadow-md mx-auto hover:bg-black hover:text-white text-xl">PUMA</div>
+          <div className="bg-cyan-200 p-4 rounded-lg shadow-md mx-auto hover:bg-black hover:text-white text-xl">BOAT</div>
         </div>
       </div>
       <div>
         {news.map((value) => (
-          <div className="bg-slate-200 rounded shadow-lg p-4 mt-5" key={value.id}>
+          <div className=" bg-dimwhite rounded shadow-lg p-4 mt-5" key={value.id}>
             <div className='flex'>
-              <h2 className='text-blue-600/75 font-extrabold mr-2 text-lg'>User Name:</h2>
+              <h2 className='text-blue-600/75 font-extrabold mr-2 text-lg '>User Name:</h2>
               <p className='text-lg'>{value.attributes.Username}</p>
             </div>
-            <div className="p-4 bg-gray-200 rounded shadow-md">
+            <div className="p-4 bg-blue-200 rounded shadow-md hover:bg-black hover:text-white">
               <div className="mt-1 flex">
                 <h2 className='text-sm subpixel-antialiased font-medium mr-2'>Comment:</h2>
                 <p className='font-medium'>{value.attributes.Title}</p>
@@ -112,8 +115,8 @@ const About = () => {
           </div>
         ))}
       </div>
-      <div className="mt-8">
-        <h2 className="text-2xl font-bold mb-4">Our Story</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center mt-4">Our Story</h2>
+      <div className="mt-8 flex md:flex-none sm:flex-none"> 
         <p className="text-lg">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at blandit metus. Integer efficitur
           vulputate massa, vel pharetra risus fermentum a. Phasellus at feugiat nisi, in blandit neque. Duis

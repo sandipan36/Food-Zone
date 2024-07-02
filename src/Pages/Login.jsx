@@ -22,7 +22,7 @@ function Login() {
 
   const fetchUser = async (token) => {
     try {
-      const response = await axios.get('https://six9foodzonee.onrender.com/api/users/me', {
+      const response = await axios.get('http://localhost:1337/api/users/me', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +37,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://six9foodzonee.onrender.com/api/auth/local', {
+      const response = await axios.post('http://localhost:1337/api/auth/local', {
         identifier: username,
         password: password,
       });

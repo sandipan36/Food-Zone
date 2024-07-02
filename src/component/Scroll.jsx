@@ -36,18 +36,18 @@ const Scroll = () => {
   return (
     <div className='h-[210px] bg-blue-100 mb-2'>
       <div className="max-w-md  bg-teal-100 rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-2 mt-2 ">
-        <div className=" h-fit flex ">
+        <div className=" h-max flex ">
           {cardsData.map((card, index) => (
             <div
               key={index}
-              className={`h-fit bg-blue-200  mt-3 absolute transition-opacity duration-500 ${
+              className={`h-fit bg-dimwhite  mt-3 absolute transition-opacity duration-500 ${
                 currentCard === index ? 'opacity-100' : 'opacity-0 pointer-events-none'
               }`}
             >
-              <div className=" md:flex h-[180px]">
+              <div className=" flex h-max">
                 <div className="md:shrink-0">
                   <img
-                    className=" ml-4 mt-2  mb-4 w-[230px] object-cover rounded-xl h-[160px] "
+                    className=" ml-4 mt-2  mb-4 object-cover rounded-xl h-[180px] w-[280px] "
                     src={card.imageUrl}
                     alt="Modern building architecture"
                   />
@@ -55,7 +55,7 @@ const Scroll = () => {
                 <div className="p-8">
                   <div className= "uppercase tracking-wide text-sm text-indigo-500 font-bold">{card.title}</div>
                   <a href="#" className="block mt-1 text-lg leading-tight font-medium text-black hover:underline ">{card.anchor}</a>
-                  <p className="mt-2 text-slate-500 mr-3 ">{card.description}</p>
+                  <p className="mt-2 text-slate-500 mr-3">{card.description}</p>
                 </div>
               </div>
             </div>
@@ -67,3 +67,4 @@ const Scroll = () => {
 };
 
 export default Scroll;
+ 
